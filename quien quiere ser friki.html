@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Fricurso - Edición Especial</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="js.js">
+</head>
+<body>
+
+    <audio id="snd-suspense" loop src="https://actions.google.com/sounds/v1/ambiences/creepy_gothic_dungeon.ogg"></audio>
+    <audio id="snd-correct" src="https://actions.google.com/sounds/v1/cartoon/cartoon_cowbell.ogg"></audio>
+    <audio id="snd-wrong" src="https://actions.google.com/sounds/v1/horror/creepy_slasher_gasp.ogg"></audio>
+
+    <div id="modal" class="game-modal">
+        <h1 id="modal-title" style="color: var(--gold); font-size: 3em; text-align: center;"></h1>
+        <div id="modal-desc" style="font-size: 1.5em; margin: 20px; text-align: center; max-width: 800px;"></div>
+        <button id="modal-continue-btn" onclick="closeModal()" style="padding: 15px 40px; cursor: pointer; font-weight: bold; background: var(--gold); border: none; border-radius: 5px;">CONTINUAR</button>
+    </div>
+
+    <div id="modal-countdown" class="game-modal">
+        <h1 id="countdown-title" style="color: var(--gold); font-size: 2.5em; text-align: center; margin-bottom: 10px;"></h1>
+        <div id="countdown-desc" style="font-size: 1.2em; text-align: center; max-width: 600px; color: #ccc;"></div>
+        <div id="timer-display">60</div>
+        <button onclick="closeCountdownModal()" style="padding: 12px 35px; cursor: pointer; font-weight: bold; background: var(--safe-blue); color: white; border: none; border-radius: 5px; font-size: 1.1em;">CERRAR COMODÍN</button>
+    </div>
+
+    <div id="modal-recovery" class="game-modal">
+        <h1 style="color: var(--safe-blue); font-size: 2.8em; text-align: center; margin-bottom: 10px;">🔄 SANTUARIO DE COMODINES</h1>
+        <div style="font-size: 1.4em; text-align: center; margin-bottom: 25px; max-width: 700px;">
+            Has alcanzado el Nivel 8. Las fuerzas del Fricurso te conceden una bendición:<br>
+            <span style="color: var(--gold); font-weight: bold;">Elige un comodín gastado para devolverlo a la vida.</span>
+        </div>
+        <div id="recovery-options-container"></div>
+    </div>
+
+    <div id="prize-ladder"></div>
+
+    <div id="game-area">
+        <div id="welcome-screen">
+            <h1 style="color: var(--gold); font-size: 4.5em; margin-bottom: 50px; text-align: center; text-shadow: 0 0 20px rgba(0,0,0,0.6); font-weight: bold; letter-spacing: 2px;">EL FRICURSO</h1>
+            <button class="action-btn btn-start-game" onclick="startGameNow()">¡EMPEZAR JUEGO!</button>
+        </div>
+
+        <div id="lifelines">
+            <button class="lifeline" id="ll-50" onclick="use5050()">50:50</button>
+            <button class="lifeline" id="ll-pub" onclick="startTimeLifeline('Público')">👥 Público</button>
+            <button class="lifeline" id="ll-tel" onclick="startTimeLifeline('Llamada')">📞 Llamada</button>
+            <button class="lifeline locked" style="border-color: var(--magic-purple)" id="ll-pablito" onclick="usePablito()">🔒 Pablito (Nvl 11)</button>
+        </div>
+
+        <div id="question-box"><div id="q-text">Cargando...</div></div>
+
+        <div id="reveal-container">
+            <button class="action-btn reveal-btn" onclick="revealAnswersNow()">🔮 REVELAR OPCIONES</button>
+            <button class="action-btn change-btn" onclick="changeQuestionNow()">🔄 CAMBIAR PREGUNTA</button>
+        </div>
+
+        <div class="answers-grid" id="answers-grid-id">
+            <button class="ans-btn" id="btn0" onclick="handleSelect(0)">A: <span id="span0"></span></button>
+            <button class="ans-btn" id="btn1" onclick="handleSelect(1)">B: <span id="span1"></span></button>
+            <button class="ans-btn" id="btn2" onclick="handleSelect(2)">C: <span id="span2"></span></button>
+            <button class="ans-btn" id="btn3" onclick="handleSelect(3)">D: <span id="span3"></span></button>
+        </div>
+    </div>
+
+</body>
+</html>
